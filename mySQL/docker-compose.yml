@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:5.6
+    restart: always
+    volumes:
+      - ./mysql_data/db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root     
+      - MYSQL_DATABASE=myDB
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
